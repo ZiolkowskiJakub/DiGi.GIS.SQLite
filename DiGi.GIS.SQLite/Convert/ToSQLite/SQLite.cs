@@ -1,15 +1,17 @@
 ﻿using DiGi.Core.Interfaces;
 using DiGi.GIS.Classes;
 using DiGi.GIS.Interfaces;
+using DiGi.SQLite.Classes;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace DiGi.GIS.SQLite
 {
     public static partial class Convert
     {
-        public static bool ToSQLite(this GISModel gISModel, string path)
+        public static bool ToSQLite_OLD(this GISModel gISModel, string path)
         {
             if (gISModel == null || string.IsNullOrWhiteSpace(path) || !System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(path)))
             {
@@ -18,7 +20,7 @@ namespace DiGi.GIS.SQLite
 
             List<ISerializableObject> serializableObjects = new List<ISerializableObject>();
 
-            ISource source = gISModel.Source;
+            ISource source = gISModel.GetObject<ISource>();
             if (source != null)
             {
                 serializableObjects.Add(source);
@@ -164,6 +166,24 @@ namespace DiGi.GIS.SQLite
                         sqliteCommand.ExecuteNonQuery();
                     }
                 }
+            }
+
+            return true;
+        }
+
+        public static bool ToSQLite(this GISModel gISModel, string path)
+        {
+            if (gISModel == null || string.IsNullOrWhiteSpace(path))
+            {
+                return false;
+            }
+
+            using (SQLiteWrapper sQLiteWrapper = new SQLiteWrapper())
+            {
+                sQLiteWrapper.ConnectionString = DiGi.SQLite.Query.ConnectionString(path);
+                sQLiteWrapper.Add(gISModel);
+
+                sQLiteWrapper.Write();
             }
 
             return true;

@@ -27,6 +27,9 @@
     <Reference Include="DiGi.Core">
       <HintPath>..\references\DiGi.Core.dll</HintPath>
     </Reference>
+    <Reference Include="DiGi.Core.IO">
+      <HintPath>..\references\DiGi.Core.IO.dll</HintPath>
+    </Reference>
     <Reference Include="DiGi.Core.Relation">
       <HintPath>..\references\DiGi.Core.Relation.dll</HintPath>
     </Reference>
@@ -47,6 +50,9 @@
     </Reference>
     <Reference Include="DiGi.Math">
       <HintPath>..\references\DiGi.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="DiGi.SQLite">
+      <HintPath>..\references\DiGi.SQLite.dll</HintPath>
     </Reference>
   </ItemGroup>
 
