@@ -1,6 +1,4 @@
-﻿using DiGi.BDOT10k.UI;
-using DiGi.BDOT10k.UI.Classes;
-using DiGi.GIS.Classes;
+﻿using DiGi.GIS.Classes;
 using DiGi.GIS.SQLite.Classes;
 using System.IO;
 using System.IO.Compression;
@@ -61,27 +59,15 @@ namespace DiGi.GIS.SQLite
 
                             ZipArchive zipArchive_Files = new ZipArchive(deflateStream_Zip);
 
-                            SlownikObiektowGeometrycznych slownikObiektowGeometrycznych = new SlownikObiektowGeometrycznych();
+                            DirectorySource directorySource = new DirectorySource(zipArchiveEntry_Zip.FullName);
+                            GISModel gISModel = new GISModel(directorySource);
 
                             foreach (ZipArchiveEntry zipArchiveEntry_File in zipArchive_Files.Entries)
                             {
                                 if (zipArchiveEntry_File.Name.EndsWith(Constans.FileNamePrefix.OT_ADMS_A) || zipArchiveEntry_File.Name.EndsWith(Constans.FileNamePrefix.OT_BUBD_A))
                                 {
-                                    slownikObiektowGeometrycznych.Load(zipArchiveEntry_File.Open());
+                                    gISModel.AddRange(zipArchiveEntry_File.Open());
                                 }
-                            }
-
-                            if (slownikObiektowGeometrycznych.GetObiektGeometryczny<BUBD_A>() == null || slownikObiektowGeometrycznych.GetObiektGeometryczny<ADMS_A>() == null)
-                            {
-                                continue;
-                            }
-
-                            DirectorySource directorySource = new DirectorySource(zipArchiveEntry_Zip.FullName);
-
-                            GISModel gISModel = GIS.Convert.ToDiGi(slownikObiektowGeometrycznych, directorySource);
-                            if (gISModel == null)
-                            {
-                                continue;
                             }
 
                             string path_SQLite = Path.Combine(directory_Region, string.Format("{0}.sqlite3", Path.GetFileNameWithoutExtension(zipArchiveEntry_Zip.Name)));
