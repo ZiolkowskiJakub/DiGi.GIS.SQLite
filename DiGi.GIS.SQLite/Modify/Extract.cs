@@ -78,7 +78,7 @@ namespace DiGi.GIS.SQLite
 
                             DirectorySource directorySource = new DirectorySource(zipArchiveEntry_Zip.FullName);
 
-                            GISModel gISModel = GIS.Convert.ToDiGi(slownikObiektowGeometrycznych, directorySource);
+                            GISModel gISModel = null; //GIS.Convert.ToDiGi(slownikObiektowGeometrycznych, directorySource);
                             if (gISModel == null)
                             {
                                 continue;

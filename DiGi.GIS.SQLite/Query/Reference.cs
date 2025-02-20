@@ -13,10 +13,10 @@ namespace DiGi.GIS.SQLite
 
             if(serializableObject is IUniqueObject)
             {
-                return ((IUniqueObject)serializableObject).Guid.ToString();
+                return ((IUniqueObject)serializableObject).Reference();
             }
 
-            return Core.Convert.ToString(serializableObject).GetHashCode().ToString();
+            return Core.Convert.ToSystem_String(serializableObject).GetHashCode().ToString();
         }
 
     }

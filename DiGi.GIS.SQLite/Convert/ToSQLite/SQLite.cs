@@ -154,7 +154,7 @@ namespace DiGi.GIS.SQLite
                             continue;
                         }
 
-                        string json = Core.Convert.ToString(serializableObject);
+                        string json = Core.Convert.ToSystem_String(serializableObject);
                         if (json == null)
                         {
                             continue;
