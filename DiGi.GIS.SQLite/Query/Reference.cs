@@ -6,18 +6,17 @@ namespace DiGi.GIS.SQLite
     {
         public static string Reference(this ISerializableObject serializableObject)
         {
-            if(serializableObject == null)
+            if (serializableObject == null)
             {
                 return null;
             }
 
-            if(serializableObject is IUniqueObject)
+            if (serializableObject is IUniqueObject)
             {
                 return ((IUniqueObject)serializableObject).Reference();
             }
 
             return Core.Convert.ToSystem_String(serializableObject).GetHashCode().ToString();
         }
-
     }
 }

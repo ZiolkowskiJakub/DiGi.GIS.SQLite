@@ -5,7 +5,6 @@ using DiGi.SQLite.Classes;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace DiGi.GIS.SQLite
 {
@@ -188,7 +187,5 @@ namespace DiGi.GIS.SQLite
 
             return true;
         }
-
     }
 }
-

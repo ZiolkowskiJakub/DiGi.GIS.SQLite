@@ -87,7 +87,8 @@ namespace DiGi.GIS.SQLite
                             string path_SQLite = Path.Combine(directory_Region, string.Format("{0}.sqlite3", Path.GetFileNameWithoutExtension(zipArchiveEntry_Zip.Name)));
 
                             Convert.ToSQLite(gISModel, path_SQLite);
-                        };
+                        }
+                        ;
                     }
                 }
             }
@@ -96,4 +97,3 @@ namespace DiGi.GIS.SQLite
         }
     }
 }
-

@@ -25,13 +25,11 @@ namespace DiGi.GIS.SQLite.Classes
         public SQLiteExtractOptions()
             : base()
         {
-
         }
 
         public SQLiteExtractOptions(JsonObject jsonObject)
             : base(jsonObject)
         {
-
         }
     }
 }

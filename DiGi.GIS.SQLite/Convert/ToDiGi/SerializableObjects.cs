@@ -39,7 +39,7 @@ namespace DiGi.GIS.SQLite
 
         public static List<T> ToDiGi<T>(SqliteConnection sqliteConnection, Func<T, bool> func = null) where T : ISerializableObject
         {
-            if(sqliteConnection == null)
+            if (sqliteConnection == null)
             {
                 return null;
             }
@@ -56,12 +56,12 @@ namespace DiGi.GIS.SQLite
                         string fullTypeName = sqliteDataReader.GetString(1);
 
                         Type type = Core.Query.Type(fullTypeName);
-                        if(type == null)
+                        if (type == null)
                         {
                             continue;
                         }
 
-                        if(!typeof(T).IsAssignableFrom(type))
+                        if (!typeof(T).IsAssignableFrom(type))
                         {
                             continue;
                         }
@@ -72,7 +72,7 @@ namespace DiGi.GIS.SQLite
                     }
                 }
 
-                if(tuples == null || tuples.Count == 0)
+                if (tuples == null || tuples.Count == 0)
                 {
                     return null;
                 }
@@ -87,12 +87,12 @@ namespace DiGi.GIS.SQLite
                         while (sqliteDataReader.Read())
                         {
                             List<T> ts = Core.Convert.ToDiGi<T>(sqliteDataReader.GetString(0));
-                            if(ts == null || ts.Count == 0)
+                            if (ts == null || ts.Count == 0)
                             {
                                 continue;
                             }
 
-                            if(func != null && !func.Invoke(ts[0]))
+                            if (func != null && !func.Invoke(ts[0]))
                             {
                                 continue;
                             }
@@ -100,7 +100,6 @@ namespace DiGi.GIS.SQLite
                             result.Add(ts[0]);
                         }
                     }
-
                 }
 
                 return result;
