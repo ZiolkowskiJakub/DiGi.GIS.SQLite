@@ -9,50 +9,46 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Create\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.2" />
     <PackageReference Include="System.Text.Json" Version="10.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="DiGi.BDOT10k">
-      <HintPath>..\references\DiGi.BDOT10k.dll</HintPath>
+      <HintPath>..\..\DiGi.BDOT10k\bin\DiGi.BDOT10k.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.BDOT10k.UI">
-      <HintPath>..\references\DiGi.BDOT10k.UI.dll</HintPath>
+      <HintPath>..\..\DiGi.BDOT10k.UI\bin\DiGi.BDOT10k.UI.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.Core">
-      <HintPath>..\references\DiGi.Core.dll</HintPath>
+      <HintPath>..\..\DiGi.Core\bin\DiGi.Core.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.Core.IO">
-      <HintPath>..\references\DiGi.Core.IO.dll</HintPath>
+      <HintPath>..\..\DiGi.Core\bin\DiGi.Core.IO.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.Core.Relation">
-      <HintPath>..\references\DiGi.Core.Relation.dll</HintPath>
+      <HintPath>..\..\DiGi.Core\bin\DiGi.Core.Relation.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.Geometry">
-      <HintPath>..\references\DiGi.Geometry.dll</HintPath>
+      <HintPath>..\..\DiGi.Geometry\bin\DiGi.Geometry.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.Geometry.Object">
-      <HintPath>..\references\DiGi.Geometry.Object.dll</HintPath>
+      <HintPath>..\..\DiGi.Geometry\bin\DiGi.Geometry.Object.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.Geometry.Visual">
-      <HintPath>..\references\DiGi.Geometry.Visual.dll</HintPath>
+      <HintPath>..\..\DiGi.Geometry.Visual\bin\DiGi.Geometry.Visual.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.GIS">
-      <HintPath>..\references\DiGi.GIS.dll</HintPath>
+      <HintPath>..\..\DiGi.GIS\bin\DiGi.GIS.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.GML">
-      <HintPath>..\references\DiGi.GML.dll</HintPath>
+      <HintPath>..\..\DiGi.GML\bin\DiGi.GML.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.Math">
-      <HintPath>..\references\DiGi.Math.dll</HintPath>
+      <HintPath>..\..\DiGi.Math\bin\DiGi.Math.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.SQLite">
-      <HintPath>..\references\DiGi.SQLite.dll</HintPath>
+      <HintPath>..\..\DiGi.SQLite\bin\DiGi.SQLite.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -65,7 +65,7 @@ namespace DiGi.GIS.SQLite
 
                             foreach (ZipArchiveEntry zipArchiveEntry_File in zipArchive_Files.Entries)
                             {
-                                if (zipArchiveEntry_File.Name.EndsWith(Constans.FileNamePrefix.OT_ADMS_A) || zipArchiveEntry_File.Name.EndsWith(Constans.FileNamePrefix.OT_BUBD_A))
+                                if (zipArchiveEntry_File.Name.EndsWith(Constants.FileNamePrefix.OT_ADMS_A) || zipArchiveEntry_File.Name.EndsWith(Constants.FileNamePrefix.OT_BUBD_A))
                                 {
                                     slownikObiektowGeometrycznych.Load(zipArchiveEntry_File.Open());
                                 }
