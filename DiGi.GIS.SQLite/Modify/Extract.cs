@@ -29,68 +29,64 @@ namespace DiGi.GIS.SQLite
                 Directory.CreateDirectory(directory);
             }
 
-            using (ZipArchive zipArchive = ZipFile.OpenRead(path))
+            using ZipArchive zipArchive = ZipFile.OpenRead(path);
+
+            foreach (ZipArchiveEntry zipArchiveEntry in zipArchive.Entries)
             {
-                foreach (ZipArchiveEntry zipArchiveEntry in zipArchive.Entries)
+                if (!(zipArchiveEntry.Open() is DeflateStream deflateStream))
                 {
-                    DeflateStream deflateStream = zipArchiveEntry.Open() as DeflateStream;
-                    if (deflateStream == null)
+                    continue;
+                }
+
+                using ZipArchive zipArchive_ZipArchieve = new ZipArchive(deflateStream);
+
+                foreach (ZipArchiveEntry zipArchiveEntry_Zip in zipArchive_ZipArchieve.Entries)
+                {
+                    string directory_Region = Path.Combine(directory, Path.GetFileNameWithoutExtension(zipArchiveEntry_Zip.Name));
+                    if (!Directory.Exists(directory_Region))
+                    {
+                        Directory.CreateDirectory(directory_Region);
+                    }
+                    else if (!sQLiteExtractOptions.UpdateExisting)
                     {
                         continue;
                     }
 
-                    using (ZipArchive zipArchive_ZipArchieve = new ZipArchive(deflateStream))
+                    if (!(zipArchiveEntry_Zip.Open() is DeflateStream deflateStream_Zip))
                     {
-                        foreach (ZipArchiveEntry zipArchiveEntry_Zip in zipArchive_ZipArchieve.Entries)
-                        {
-                            string directory_Region = Path.Combine(directory, Path.GetFileNameWithoutExtension(zipArchiveEntry_Zip.Name));
-                            if (!Directory.Exists(directory_Region))
-                            {
-                                Directory.CreateDirectory(directory_Region);
-                            }
-                            else if (!sQLiteExtractOptions.UpdateExisting)
-                            {
-                                continue;
-                            }
-
-                            DeflateStream deflateStream_Zip = zipArchiveEntry_Zip.Open() as DeflateStream;
-                            if (deflateStream_Zip == null)
-                            {
-                                continue;
-                            }
-
-                            ZipArchive zipArchive_Files = new ZipArchive(deflateStream_Zip);
-
-                            SlownikObiektowGeometrycznych slownikObiektowGeometrycznych = new SlownikObiektowGeometrycznych();
-
-                            foreach (ZipArchiveEntry zipArchiveEntry_File in zipArchive_Files.Entries)
-                            {
-                                if (zipArchiveEntry_File.Name.EndsWith(Constants.FileNamePrefix.OT_ADMS_A) || zipArchiveEntry_File.Name.EndsWith(Constants.FileNamePrefix.OT_BUBD_A))
-                                {
-                                    slownikObiektowGeometrycznych.Load(zipArchiveEntry_File.Open());
-                                }
-                            }
-
-                            if (slownikObiektowGeometrycznych.GetObiektGeometryczny<BUBD_A>() == null || slownikObiektowGeometrycznych.GetObiektGeometryczny<ADMS_A>() == null)
-                            {
-                                continue;
-                            }
-
-                            DirectorySource directorySource = new DirectorySource(zipArchiveEntry_Zip.FullName);
-
-                            GISModel gISModel = null; //GIS.Convert.ToDiGi(slownikObiektowGeometrycznych, directorySource);
-                            if (gISModel == null)
-                            {
-                                continue;
-                            }
-
-                            string path_SQLite = Path.Combine(directory_Region, string.Format("{0}.sqlite3", Path.GetFileNameWithoutExtension(zipArchiveEntry_Zip.Name)));
-
-                            Convert.ToSQLite(gISModel, path_SQLite);
-                        }
-                        ;
+                        continue;
                     }
+
+                    ZipArchive zipArchive_Files = new ZipArchive(deflateStream_Zip);
+
+                    SlownikObiektowGeometrycznych slownikObiektowGeometrycznych = new SlownikObiektowGeometrycznych();
+
+                    foreach (ZipArchiveEntry zipArchiveEntry_File in zipArchive_Files.Entries)
+                    {
+                        if (zipArchiveEntry_File.Name.EndsWith(Constants.FileNameSufix.OT_ADMS_A) || zipArchiveEntry_File.Name.EndsWith(Constants.FileNameSufix.OT_BUBD_A))
+                        {
+                            slownikObiektowGeometrycznych.Load(zipArchiveEntry_File.Open());
+                        }
+                    }
+
+                    if (slownikObiektowGeometrycznych.GetObiektGeometryczny<BUBD_A>() == null || slownikObiektowGeometrycznych.GetObiektGeometryczny<ADMS_A>() == null)
+                    {
+                        continue;
+                    }
+
+                    DirectorySource directorySource = new DirectorySource(zipArchiveEntry_Zip.FullName);
+
+                    GISModel gISModel = null; //GIS.Convert.ToDiGi(slownikObiektowGeometrycznych, directorySource);
+                    if (gISModel == null)
+                    {
+                        continue;
+                    }
+
+                    string path_SQLite = Path.Combine(directory_Region, string.Format("{0}.sqlite3", Path.GetFileNameWithoutExtension(zipArchiveEntry_Zip.Name)));
+
+                    Convert.ToSQLite(gISModel, path_SQLite);
                 }
+                    ;
             }
 
             return true;
