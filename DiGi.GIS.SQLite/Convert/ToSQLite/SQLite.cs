@@ -10,6 +10,12 @@ namespace DiGi.GIS.SQLite
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Serializes a <see cref="GISModel"/> to a SQLite database using an older implementation method.
+        /// </summary>
+        /// <param name="gISModel">The <see cref="GISModel"/> instance containing the data to be serialized.</param>
+        /// <param name="path">The file system path where the SQLite database should be stored.</param>
+        /// <returns>True if the serialization process completed successfully; otherwise, false.</returns>
         public static bool ToSQLite_OLD(this GISModel gISModel, string path)
         {
             if (gISModel == null || string.IsNullOrWhiteSpace(path) || !System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(path)))
@@ -40,6 +46,13 @@ namespace DiGi.GIS.SQLite
             return ToSQLite(serializableObjects, path);
         }
 
+        /// <summary>
+        /// Serializes a collection of objects implementing <see cref="ISerializableObject"/> to a SQLite database at the specified path.
+        /// </summary>
+        /// <typeparam name="T">A type that implements the <see cref="ISerializableObject"/> interface.</typeparam>
+        /// <param name="serializableObjects">An <see cref="IEnumerable{T}"/> of objects to be serialized.</param>
+        /// <param name="path">The file system path where the SQLite database should be stored.</param>
+        /// <returns>True if the serialization process completed successfully; otherwise, false.</returns>
         public static bool ToSQLite<T>(this IEnumerable<T> serializableObjects, string path) where T : ISerializableObject
         {
             if (string.IsNullOrWhiteSpace(path) || !System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(path)))
@@ -70,6 +83,13 @@ namespace DiGi.GIS.SQLite
             return result;
         }
 
+        /// <summary>
+        /// Serializes a collection of objects implementing <see cref="ISerializableObject"/> to a SQLite database using the provided connection.
+        /// </summary>
+        /// <typeparam name="T">A type that implements the <see cref="ISerializableObject"/> interface.</typeparam>
+        /// <param name="serializableObjects">An <see cref="IEnumerable{T}"/> of objects to be serialized.</param>
+        /// <param name="sqliteConnection">The active <see cref="SqliteConnection"/> used to access the SQLite database.</param>
+        /// <returns>True if the serialization process completed successfully; otherwise, false.</returns>
         public static bool ToSQLite<T>(this IEnumerable<T> serializableObjects, SqliteConnection sqliteConnection) where T : ISerializableObject
         {
             if (serializableObjects == null)
@@ -170,6 +190,12 @@ namespace DiGi.GIS.SQLite
             return true;
         }
 
+        /// <summary>
+        /// Serializes a <see cref="GISModel"/> to a SQLite database using the <see cref="SQLiteWrapper"/>.
+        /// </summary>
+        /// <param name="gISModel">The <see cref="GISModel"/> instance containing the data to be serialized.</param>
+        /// <param name="path">The file system path where the SQLite database should be stored.</param>
+        /// <returns>True if the serialization process completed successfully; otherwise, false.</returns>
         public static bool ToSQLite(this GISModel gISModel, string path)
         {
             if (gISModel == null || string.IsNullOrWhiteSpace(path))

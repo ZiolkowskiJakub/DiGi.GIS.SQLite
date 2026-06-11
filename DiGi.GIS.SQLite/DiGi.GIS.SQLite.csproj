@@ -17,8 +17,8 @@
     <Reference Include="DiGi.BDOT10k">
       <HintPath>..\..\DiGi.BDOT10k\bin\DiGi.BDOT10k.dll</HintPath>
     </Reference>
-    <Reference Include="DiGi.BDOT10k.UI">
-      <HintPath>..\..\DiGi.BDOT10k.UI\bin\DiGi.BDOT10k.UI.dll</HintPath>
+    <Reference Include="DiGi.BDOT10k.Geometry">
+      <HintPath>..\..\DiGi.BDOT10k\bin\DiGi.BDOT10k.Geometry.dll</HintPath>
     </Reference>
     <Reference Include="DiGi.Core">
       <HintPath>..\..\DiGi.Core\bin\DiGi.Core.dll</HintPath>

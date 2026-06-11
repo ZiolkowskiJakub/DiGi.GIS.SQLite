@@ -7,6 +7,13 @@ namespace DiGi.GIS.SQLite
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Deserializes a collection of objects implementing <see cref="ISerializableObject"/> from a SQLite database file at the specified path.
+        /// </summary>
+        /// <typeparam name="T">The type of objects to deserialize, which must implement <see cref="ISerializableObject"/>.</typeparam>
+        /// <param name="path">The file system path to the SQLite database file.</param>
+        /// <param name="func">An optional predicate function used to filter the deserialized objects.</param>
+        /// <returns>A list of deserialized objects of type <typeparam ref="T"/>, or null if the path is invalid or the file does not exist.</returns>
         public static List<T> ToDiGi<T>(string path, Func<T, bool> func = null) where T : ISerializableObject
         {
             if (string.IsNullOrWhiteSpace(path) || !System.IO.File.Exists(path))
@@ -37,6 +44,13 @@ namespace DiGi.GIS.SQLite
             return result;
         }
 
+        /// <summary>
+        /// Deserializes a collection of objects implementing <see cref="ISerializableObject"/> using an existing SQLite connection.
+        /// </summary>
+        /// <typeparam name="T">The type of objects to deserialize, which must implement <see cref="ISerializableObject"/>.</typeparam>
+        /// <param name="sqliteConnection">An open <see cref="SqliteConnection"/> to the SQLite database.</param>
+        /// <param name="func">An optional predicate function used to filter the deserialized objects.</param>
+        /// <returns>A list of deserialized objects of type <typeparam ref="T"/>, or null if the connection is null or no compatible types are found.</returns>
         public static List<T> ToDiGi<T>(SqliteConnection sqliteConnection, Func<T, bool> func = null) where T : ISerializableObject
         {
             if (sqliteConnection == null)

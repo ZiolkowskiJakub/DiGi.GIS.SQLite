@@ -1,5 +1,5 @@
-﻿using DiGi.BDOT10k.UI;
-using DiGi.BDOT10k.UI.Classes;
+using DiGi.BDOT10k.Geometry;
+using DiGi.BDOT10k.Geometry.Classes;
 using DiGi.GIS.Classes;
 using DiGi.GIS.SQLite.Classes;
 using System.IO;
@@ -9,6 +9,11 @@ namespace DiGi.GIS.SQLite
 {
     public static partial class Modify
     {
+        /// <summary>
+        /// Extracts data from ZipArchive files based on the provided options and converts them into SQLite structures.
+        /// </summary>
+        /// <param name="sQLiteExtractOptions">The extraction options containing source path, destination directory, and update settings.</param>
+        /// <returns>True if the extraction process completed successfully; otherwise, false.</returns>
         public static bool Extract(this SQLiteExtractOptions sQLiteExtractOptions)
         {
             if (sQLiteExtractOptions == null)
