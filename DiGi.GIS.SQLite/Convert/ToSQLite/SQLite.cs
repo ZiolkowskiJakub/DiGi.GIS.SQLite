@@ -1,4 +1,4 @@
-﻿using DiGi.Core.Interfaces;
+using DiGi.Core.Interfaces;
 using DiGi.GIS.Classes;
 using DiGi.GIS.Interfaces;
 using DiGi.SQLite.Classes;
@@ -16,7 +16,7 @@ namespace DiGi.GIS.SQLite
         /// <param name="gISModel">The <see cref="GISModel"/> instance containing the data to be serialized.</param>
         /// <param name="path">The file system path where the SQLite database should be stored.</param>
         /// <returns>True if the serialization process completed successfully; otherwise, false.</returns>
-        public static bool ToSQLite_OLD(this GISModel gISModel, string path)
+        public static bool ToSQLiteOld(this GISModel gISModel, string path)
         {
             if (gISModel == null || string.IsNullOrWhiteSpace(path) || !System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(path)))
             {
@@ -70,9 +70,9 @@ namespace DiGi.GIS.SQLite
 
                     result = ToSQLite(serializableObjects, sqliteConnection);
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
-                    throw exception;
+                    throw;
                 }
                 finally
                 {
@@ -143,14 +143,14 @@ namespace DiGi.GIS.SQLite
                     sqliteCommand.Parameters.Clear();
                     sqliteCommand.Parameters.AddWithValue("@FullTypeName", fullTypeName);
 
-                    int typeId = System.Convert.ToInt32(sqliteCommand.ExecuteScalar());
+                    int typeId = System.Convert.ToInt32(sqliteCommand.ExecuteScalar(), System.Globalization.CultureInfo.InvariantCulture);
 
-                    string tableName = string.Format("Type_{0}", typeId);
+                    string tableName = string.Format(System.Globalization.CultureInfo.InvariantCulture, "Type_{0}", typeId);
 
-                    sqliteCommand.CommandText = string.Format(@"CREATE TABLE IF NOT EXISTS {0} (Id INTEGER PRIMARY KEY AUTOINCREMENT, Reference TEXT NOT NULL UNIQUE, Json TEXT NOT NULL)", tableName);
+                    sqliteCommand.CommandText = string.Format(System.Globalization.CultureInfo.InvariantCulture, @"CREATE TABLE IF NOT EXISTS {0} (Id INTEGER PRIMARY KEY AUTOINCREMENT, Reference TEXT NOT NULL UNIQUE, Json TEXT NOT NULL)", tableName);
                     sqliteCommand.ExecuteNonQuery();
 
-                    sqliteCommand.CommandText = string.Format("INSERT OR REPLACE INTO {0} (Reference, Json) VALUES (@Reference, @Json)", tableName);
+                    sqliteCommand.CommandText = string.Format(System.Globalization.CultureInfo.InvariantCulture, "INSERT OR REPLACE INTO {0} (Reference, Json) VALUES (@Reference, @Json)", tableName);
 
                     sqliteCommand.Parameters.Clear();
 

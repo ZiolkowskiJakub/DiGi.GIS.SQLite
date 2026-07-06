@@ -25,7 +25,7 @@ namespace DiGi.GIS.SQLite
                 return ((IUniqueObject)serializableObject).Reference();
             }
 
-            return Core.Convert.ToSystem_String(serializableObject).GetHashCode().ToString();
+            return Core.Convert.ToSystem_String(serializableObject).GetHashCode().ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
     }
 }

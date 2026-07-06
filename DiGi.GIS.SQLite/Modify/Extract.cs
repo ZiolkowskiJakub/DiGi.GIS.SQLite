@@ -68,7 +68,7 @@ namespace DiGi.GIS.SQLite
 
                     foreach (ZipArchiveEntry zipArchiveEntry_File in zipArchive_Files.Entries)
                     {
-                        if (zipArchiveEntry_File.Name.EndsWith(Constants.FileNameSufix.OT_ADMS_A) || zipArchiveEntry_File.Name.EndsWith(Constants.FileNameSufix.OT_BUBD_A))
+                        if (zipArchiveEntry_File.Name.EndsWith(Constants.FileNameSufix.OT_ADMS_A, System.StringComparison.Ordinal) || zipArchiveEntry_File.Name.EndsWith(Constants.FileNameSufix.OT_BUBD_A, System.StringComparison.Ordinal))
                         {
                             slownikObiektowGeometrycznych.Load(zipArchiveEntry_File.Open());
                         }
@@ -87,7 +87,7 @@ namespace DiGi.GIS.SQLite
                         continue;
                     }
 
-                    string path_SQLite = Path.Combine(directory_Region, string.Format("{0}.sqlite3", Path.GetFileNameWithoutExtension(zipArchiveEntry_Zip.Name)));
+                    string path_SQLite = Path.Combine(directory_Region, string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}.sqlite3", Path.GetFileNameWithoutExtension(zipArchiveEntry_Zip.Name)));
 
                     Convert.ToSQLite(gISModel, path_SQLite);
                 }

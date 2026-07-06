@@ -1,4 +1,4 @@
-﻿using DiGi.Core.Interfaces;
+using DiGi.Core.Interfaces;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
@@ -31,9 +31,9 @@ namespace DiGi.GIS.SQLite
 
                     result = ToDiGi(sqliteConnection, func);
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
-                    throw exception;
+                    throw;
                 }
                 finally
                 {
@@ -95,7 +95,7 @@ namespace DiGi.GIS.SQLite
 
                 foreach (Tuple<int, Type> tuple in tuples)
                 {
-                    sqliteCommand.CommandText = string.Format("SELECT Json FROM {0}", string.Format("Type_{0}", tuple.Item1));
+                    sqliteCommand.CommandText = string.Format(System.Globalization.CultureInfo.InvariantCulture, "SELECT Json FROM {0}", string.Format(System.Globalization.CultureInfo.InvariantCulture, "Type_{0}", tuple.Item1));
                     using (SqliteDataReader sqliteDataReader = sqliteCommand.ExecuteReader())
                     {
                         while (sqliteDataReader.Read())

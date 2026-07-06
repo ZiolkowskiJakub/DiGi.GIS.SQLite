@@ -202,24 +202,24 @@ The file system path where the SQLite database should be stored\.
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 True if the serialization process completed successfully; otherwise, false\.
 
-<a name='DiGi.GIS.SQLite.Convert.ToSQLite_OLD(thisDiGi.GIS.Classes.GISModel,string)'></a>
+<a name='DiGi.GIS.SQLite.Convert.ToSQLiteOld(thisDiGi.GIS.Classes.GISModel,string)'></a>
 
-## Convert\.ToSQLite\_OLD\(this GISModel, string\) Method
+## Convert\.ToSQLiteOld\(this GISModel, string\) Method
 
 Serializes a [DiGi\.GIS\.Classes\.GISModel](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.gismodel 'DiGi\.GIS\.Classes\.GISModel') to a SQLite database using an older implementation method\.
 
 ```csharp
-public static bool ToSQLite_OLD(this DiGi.GIS.Classes.GISModel gISModel, string path);
+public static bool ToSQLiteOld(this DiGi.GIS.Classes.GISModel gISModel, string path);
 ```
 #### Parameters
 
-<a name='DiGi.GIS.SQLite.Convert.ToSQLite_OLD(thisDiGi.GIS.Classes.GISModel,string).gISModel'></a>
+<a name='DiGi.GIS.SQLite.Convert.ToSQLiteOld(thisDiGi.GIS.Classes.GISModel,string).gISModel'></a>
 
 `gISModel` [DiGi\.GIS\.Classes\.GISModel](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.gismodel 'DiGi\.GIS\.Classes\.GISModel')
 
 The [DiGi\.GIS\.Classes\.GISModel](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.gismodel 'DiGi\.GIS\.Classes\.GISModel') instance containing the data to be serialized\.
 
-<a name='DiGi.GIS.SQLite.Convert.ToSQLite_OLD(thisDiGi.GIS.Classes.GISModel,string).path'></a>
+<a name='DiGi.GIS.SQLite.Convert.ToSQLiteOld(thisDiGi.GIS.Classes.GISModel,string).path'></a>
 
 `path` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
